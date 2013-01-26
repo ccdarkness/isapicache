@@ -1,0 +1,12 @@
+系统版本2.1.0
+
+1.
+增加wincache的接口，只用用于iis fastcgi模式
+修改：E:\Work\www.chinahighlihts.com\CI\system\libraries\Cache\Cache.php
+增加：E:\Work\www.chinahighlihts.com\CI\system\libraries\Cache\drivers\Cache_wincache.php
+
+
+
+2.
+打印mssql的代码执行时间
+修改：E:\Work\www.chinahighlihts.com\CI\system\libraries\Profiler.php
