@@ -1,1 +1,81 @@
-sdsdsadsa
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>信息管理</title>
+        <link rel="stylesheet" href="/js/poshytip/tip-yellow/tip-yellow.css" type="text/css" />
+        <link rel="stylesheet" href="/js/zTree/zTreeStyle/zTreeStyle.css" type="text/css" />
+        <link rel="stylesheet" href="/js/zTree/demo.css" type="text/css" />
+        <link rel="stylesheet" href="/js/modaldialog/css/jquery.modaldialog.css" type="text/css" />
+        <link rel="stylesheet" href="/js/kindeditor/themes/default/default.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/css/layout.css" type="text/css" />
+        <link rel="stylesheet" href="/js/jquery-ui/smoothness/jquery-ui-1.8.21.custom.css" type="text/css" />
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui/jquery-ui-1.8.21.custom.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.form.min.js"></script> 
+        <script type="text/javascript" src="/js/poshytip/jquery.poshytip.min.js"></script> 
+        <script type="text/javascript" src="/js/zTree/jquery.ztree.all.min.js"></script>
+        <script type="text/javascript" src="/js/modaldialog/jquery.modaldialog.js"></script>
+        <script type="text/javascript" src="/js/kindeditor/kindeditor-min.js"></script>
+        <script type="text/javascript" src="/js/kindeditor/lang/zh_CN.js"></script>
+        <script type="text/javascript" src="/js/basic.js"></script>
+  	<link rel="shortcut icon" href="/bootstrap/img/glyphicons_290_skull.png">
+		
+	<script language="javascript">
+		//快速图片上传
+		function openKCFinder_fast() {
+			window.CallBack=oopenKCFinder_fast_callback;
+			window.open('/media/popselectpicture.php?site_lgc=<?php echo $this->config->item('site_lgc'); ?>', 'kcfinder_textbox', 'status=0, toolbar=0, location=0, menubar=0, directories=0,resizable=1, scrollbars=0, width=800, height=600' );
+		} 
+		
+		function oopenKCFinder_fast_callback(result) {
+			var site_image_url='<?php echo $this->config->item('site_image_url') ?>';
+			if (result != null && result.Pinfo[0]) {
+				$.modaldialog.success("图片地址：<br/>"+site_image_url+result.Pinfo[0].PUrl);
+			}  
+		}
+		
+	</script>	
+	
+    </head>
+    <body>
+        <div  id="wrap">
+            <div id="top">
+                <div id="banner">
+	      <div class="divbox">
+	        <div class="logo"><a href="/">信息管理系统</a></div>
+                      
+	        <div class="SiteSelect">
+	          <label>站点</label>
+              <select name="site_select" id="site_select"  onchange="window.location.href='<?php echo site_url('login/change_site/'); ?>/'+$('#site_select').val();">
+                <?php
+                foreach ($this->config->item('site') as $site_item)
+                {
+                    $this->config->item('site_code') == $site_item['site_code'] ? $select_str = 'selected' : $select_str = '';
+                    ?>
+                    <option <?php echo $select_str; ?> value="<?php echo $site_item['site_code'] ?>" ><?php echo $site_item['site_code'] ?></option>
+                <?php } ?>
+              </select>
+	          <label>, <?php $admin_info=$this->session->userdata('session_admin'); echo $admin_info['OPI_Name']?></label>
+	          <label><a href="<?php echo site_url('login/out'); ?>">退出</a></label>
+			  <input type="button" onclick="openKCFinder_fast();" value="快速图片上传" />  
+            </div>
+                   <form id="form_information_search" name="form_information_search" method="post" action="<?php echo site_url('welcome/search/') ?>">
+
+            <div class="searchbar"><a href="javascript:void(0);" onclick="$('#form_information_search').submit();"></a><input name="keywords" id="keywords" type="text" value="<?php echo isset($keywords) ? $keywords : false; ?>" /></div> 
+			</form>
+			
+          </div>
+          <!--<div class="divbox">
+              <div class="nav">
+                <ul>
+                  <li class="begin"><a  href="#">首页</a></li>
+                  <li><a  href="#">设置</a></li>
+                  <li class="end"><a  href="#">**</a></li>
+                </ul>                
+              </div>              
+          </div>-->
+        </div>
+            </div>
+
+
